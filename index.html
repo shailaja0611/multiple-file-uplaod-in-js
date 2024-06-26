@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple File Upload</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"
+     integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: hsl(202, 71%, 52%);
+        margin: 0;
+    }
+    
+    .upload-container {
+        background: rgb(248, 248, 248);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+    
+    #fileList {
+        margin-top: 20px;
+        text-align: left;
+    }
+    
+    #fileList div {
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #2190ac;
+        border-radius: 3px;
+    }
+    
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color:blue;
+    }
+</style>
+
+</head>
+<body>
+    <div class="upload-container">
+        <h2>Upload Files</h2>
+        <form id="uploadForm">
+             <input type="file" id="fileInput" multiple>
+            <div id="fileList"></div>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const files = fileInput.files;
+            if (files.length === 0) {
+                alert('Please select at least one file.');
+                return;
+            }
+
+            
+            fileList.innerHTML = '';
+
+        
+            const list = document.createElement('ul');
+            fileList.appendChild(list);
+
+            for (let i = 0; i < files.length; i++) {
+                const listItem = document.createElement('li');
+                listItem.textContent = files[i].name;
+                list.appendChild(listItem);
+            }
+
+        });
+    </script>
